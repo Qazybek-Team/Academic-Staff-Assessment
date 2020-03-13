@@ -1,0 +1,3 @@
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/Qazybek-Team/Academic-Staff-Assessment-frontend.git
