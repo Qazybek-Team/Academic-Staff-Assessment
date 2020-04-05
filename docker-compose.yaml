@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  nginx:
+    build: ./nginx/
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - servers
+
+  backend:
+    build: ./backend/
+    networks:
+      - servers
+
+  frontend:
+    build: ./frontend/
+    env_file:
+      - ./frontend/.env
+    networks:
+      - servers
+    ports:
+      - 3000:3000              # Dev only
+    volumes:
+      - ./frontend:/app/    # To detect changes. Dev only
+      - /app/node_modules   # Except for node_modules
+
+networks:
+  servers:
+    driver: bridge
